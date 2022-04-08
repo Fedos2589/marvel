@@ -11,10 +11,11 @@ export interface PaginationProps {
 
 const firstPage = '<<';
 const lastPage = '>>';
-
+// я понимаю, что логику пагинации лучше вынусти в хук,
+// но на моем опыте хорошая кастомизируемая пагинация это много времени,
+// поэтому вот такая небольшая собрана прямо в компоненте
 export const Pagination = ({ total, page, onClick }: PaginationProps) => {
   const lastPageNumber = useMemo(() => Math.ceil(total / charactersPerPage), [total]);
-  console.log(total, lastPageNumber)
   const buttons = useMemo(() => {
     if (total < (charactersPerPage * 2) + 1) {
       return [1, 2]
@@ -34,7 +35,6 @@ export const Pagination = ({ total, page, onClick }: PaginationProps) => {
       return onClick(1)
     }
     if (page === lastPage) {
-      console.log(page, lastPageNumber)
       return onClick(lastPageNumber)
     }
 
