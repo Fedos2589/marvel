@@ -1,7 +1,9 @@
-import { useCallback, useMemo } from 'react';
+import { MouseEvent, useCallback, useMemo } from 'react';
 import { charactersPerPage } from '../../pages';
-import styles from './pagination.module.scss';
 import { PaginationButton } from './paginationButton';
+
+import styles from './pagination.module.scss';
+import { useRouter } from 'next/router';
 
 export interface PaginationProps {
   total: number;
@@ -15,6 +17,7 @@ const lastPage = '>>';
 // но на моем опыте хорошая кастомизируемая пагинация это много времени,
 // поэтому вот такая небольшая собрана прямо в компоненте
 export const Pagination = ({ total, page, onClick }: PaginationProps) => {
+  const router = useRouter();
   const lastPageNumber = useMemo(() => Math.ceil(total / charactersPerPage), [total]);
   const buttons = useMemo(() => {
     if (total < (charactersPerPage * 2) + 1) {
@@ -30,16 +33,20 @@ export const Pagination = ({ total, page, onClick }: PaginationProps) => {
     return [firstPage, page - 1, page, page + 1, lastPage]
   }, [page, lastPageNumber])
 
-  const handleClick = useCallback((page: number | string) => {
-    if (page === firstPage) {
-      return onClick(1)
-    }
-    if (page === lastPage) {
-      return onClick(lastPageNumber)
+  const handleClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    const buttonContent = (e.target as HTMLInputElement).id;
+    const pageNumber = {
+      [firstPage]: 1,
+      [lastPage]: lastPageNumber,
     }
 
-    return onClick(Number(page))
-  }, [lastPageNumber, total])
+    const page = pageNumber[buttonContent] ?? Number(buttonContent);
+
+    onClick(page)
+    router.push({
+      query: { ...router.query, page }
+    })
+  }, [lastPageNumber, page])
 
   return (
     <div className={styles.container}>

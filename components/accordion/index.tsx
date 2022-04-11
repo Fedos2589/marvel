@@ -1,5 +1,6 @@
-import styles from './accordion.module.scss';
 import { Section } from './section';
+
+import styles from './accordion.module.scss';
 
 export type AccordionSections = Record<string, string[]>
 

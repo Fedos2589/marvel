@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ListCharacter } from '../../pages/api/types';
+
 import styles from './character.module.scss';
 
 export const Character = ({ id, name, description, imageUrl }: ListCharacter) =>
