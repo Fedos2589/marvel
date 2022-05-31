@@ -8,16 +8,16 @@ export interface SectionProps {
 }
 
 export const Section = ({ title, list }: SectionProps) => {
-  if (list?.length === 0) {
-    return null;
-  }
-
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = useCallback(
     () => setIsOpen(!isOpen),
     [isOpen],
   )
+
+  if (list?.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.section}>

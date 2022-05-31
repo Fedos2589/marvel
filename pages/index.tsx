@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { SingletonRouter, withRouter } from 'next/router'
-import api from './api';
-import { mapCharacters } from './api/mappers';
-import { ListCharacter } from './api/types';
+import api from '../api';
+import { mapCharacters } from '../api/mappers';
+import { ListCharacter } from '../api/types';
 import { Character } from '../components/character';
 import { Pagination } from '../components/pagination';
 import { Skeleton } from '../components/skeleton';

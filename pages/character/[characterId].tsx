@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { Accordion } from '../../components/accordion';
-import api from '../api';
-import { mapCharacter } from '../api/mappers';
-import { SingleCharacter } from '../api/types';
+import api from '../../api';
+import { mapCharacter } from '../../api/mappers';
+import { SingleCharacter } from '../../api/types';
 import styles from './character.module.scss';
 
 export default function Character() {
@@ -39,7 +39,7 @@ export default function Character() {
   return (
     <div className={styles.container}>
       <h1>{name}</h1>
-      <img src={imageUrl} className={styles.image} />
+      <img src={imageUrl} className={styles.image} alt='Character image' />
       <div className={styles.description}>{description}</div>
       <Accordion sections={accordionSections} />
     </div>
