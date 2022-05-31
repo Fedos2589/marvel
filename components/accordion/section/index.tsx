@@ -10,10 +10,7 @@ export interface SectionProps {
 export const Section = ({ title, list }: SectionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = useCallback(
-    () => setIsOpen(!isOpen),
-    [isOpen],
-  )
+  const handleClick = () => setIsOpen(!isOpen)
 
   if (list?.length === 0) {
     return null;

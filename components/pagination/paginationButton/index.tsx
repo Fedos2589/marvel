@@ -9,7 +9,7 @@ export interface PaginationButtonProps {
 }
 
 export const PaginationButton = ({ content, page, onClick }: PaginationButtonProps) => {
-  const classes = useMemo(() => `${styles.button} ${page === content ? styles.active : ''}`, [page, content]);
+  const classes = `${styles.button} ${page === content ? styles.active : ''}`
 
   return <button className={classes} onClick={onClick} id={String(content)}>{content}</button>;
 }

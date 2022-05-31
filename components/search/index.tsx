@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 import styles from './search.module.scss';
 
@@ -13,17 +13,17 @@ export const Search = ({ setSearch, setPage, isDisabled }: SearchProps) => {
   const router = useRouter();
   const [inputValue, setInputValue] = useState('');
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setInputValue(e.target.value);
-  },[])
+  }
 
-  const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearch(inputValue);
     setPage(1);
     router.push({ query: { search: inputValue, page: 1 } });
-  },[inputValue])
+  }
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
